@@ -4,10 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
-<body style="background-color: black; color: white;">
-    
+<body>
+    <header><h1>ROCK, PAPER & SCISSORS</h1></header>
+<div class="score-container">
+    <div id="yourScore"><h3>Your score<br><span id="human-score-num">3</span></h3></div>
+    <div id="computerScore"><h3>Computer score<br><span id="computer-score-num">5</span></h3></div>
+</div>
 
-    <script src="main.js" defer></script>
+<div class="container">
+
+    <section class="selections" >
+        <h2>Your Selection</h2>
+        <div class="selections-item">
+            <div id="rock"><span>✊</span></div>
+            <div id="paper"><span>✋</span></div>
+            <div id="scissors"><span>✌️</span></div>
+        </div>
+    </section>
+
+    <!--mid--> 
+    <section class="play">
+        <div id="play-button"><strong>Play!</strong></div>
+    </section>
+    <!--mid-->
+
+    <section class ="computer">
+        <h2>Computer Selection</h2>
+        <div class="computer-item">
+            <div id="comp-choice"><span>✋</span></div>
+        </div>
+    </section>  
+
+</div>
 </body>
+<script  defer>
+</script>
 </html>

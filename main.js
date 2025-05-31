@@ -42,12 +42,12 @@ function playRound(humanChoice,computerChoice){
     humanChoice=humanChoice.toLowerCase();
     //if both arguments are equal than tie
     if(humanChoice==computerChoice){
-        displayMessage2(`No Point! Both called ${humanChoice}<br>`);
+        displayMessage2(`No Point! Both called ${humanChoice}, <br>`);
         return
     }
     else if(humanChoice=="rock"){
         if(computerChoice=="paper"){
-            displayMessage2(`You lose! Paper beats ${humanChoice}<br>`);
+            displayMessage2(`You lose! ${humanChoice} beaten by Paper<br>`);
             computerScore++;
         }
         else{
@@ -61,13 +61,13 @@ function playRound(humanChoice,computerChoice){
             humanScore++;
         }
         else{
-            displayMessage2(`You lose! Scissor beats ${humanChoice}<br>`);
+            displayMessage2(`You lose! ${humanChoice} beaten by Scissors<br>`);
             computerScore++;
         }
     }
     else if(humanChoice=="scissors"){
         if(computerChoice=="rock"){
-            displayMessage2(`You lose! Rock beats ${humanChoice}<br>`);
+            displayMessage2(`You lose! ${humanChoice} beaten by Rock<br>`);
             computerScore++;
         }
         else{
@@ -127,9 +127,6 @@ function result(){
     }
     else if(computerScore>humanScore){
         displayMessage2(`You lost! by ${computerScore-humanScore} points`);
-    }
-    else{
-        displayMessage2(`Draw! your points : ${humanScore} Computer points : ${computerScore}`);
     }
 }
 const p1 = document.createElement("p");
