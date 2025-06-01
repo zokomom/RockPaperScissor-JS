@@ -126,11 +126,6 @@ if(humanScore<5 && computerScore<5){
 }
 })
 
-    allButtons.appendChild(rockButton)
-    allButtons.appendChild(paperButton)
-    allButtons.appendChild(scissorsButton)
-    allButtons.appendChild(playGame)
-
 function result(){
     if(humanScore>computerScore){
 
