@@ -1,3 +1,10 @@
+const computer = document.querySelector('#comp-choice')
+const humanScoreNum  = document.querySelector('#human-score-num');
+const computerScoreNum = document.querySelector('#computer-score-num');
+const resultItem = document.querySelector('.results-item');
+//selected body element 
+let body = document.querySelector('body')
+
 //function that randomly generate rock, paper or scissor
 //---> math.random() will generate a number 
 //---> based on that number we will return rock, paper or scissor
@@ -7,24 +14,18 @@
 function getComputerChoice(){
     let random_num=parseInt(Math.floor((Math.random()*3)));
     if(random_num===0){
+        computer.textContent = `✊`
         return "rock";
     }
     else if(random_num===1){
+        computer.textContent = `✋`
         return "paper";
     }
     else{
+        computer.textContent = `✌️`
         return "scissors";
     }
 }
-
-//selected body element and appended a div element as a container
-let body = document.querySelector('body')
-let allButtons = document.createElement('div')
-let resultPara = document.createElement('div')
-resultPara.setAttribute('id',resultPara)
-allButtons.setAttribute("id",allButtons)
-body.appendChild(allButtons)
-body.appendChild(resultPara)
 
 //declaration and intitialization of scores
 let humanScore=0;
@@ -36,42 +37,51 @@ let computerScore=0;
 function playRound(humanChoice,computerChoice){
     //converts humanChoice to lower case
     if(!humanChoice || !computerChoice){
-        displayMessage2('*Please Select Your Option*<br>')
+        resultShow('* Please Select Your Option *')
+        resultItem.style.color = '#ffffff'
+        computer.textContent='💻'
         return
     }
     humanChoice=humanChoice.toLowerCase();
     //if both arguments are equal than tie
     if(humanChoice==computerChoice){
-        displayMessage2(`No Point! Both called ${humanChoice}, <br>`);
+        resultShow(`Uh-oh! Stalemate!!! Both called ${humanChoice}`);
+        resultItem.style.color = '#ffffff'
         return
     }
     else if(humanChoice=="rock"){
         if(computerChoice=="paper"){
-            displayMessage2(`You lose! ${humanChoice} beaten by Paper<br>`);
+            resultShow(`U lost boy!!! Paper ENVELOPS rock!!!`);
+            resultItem.style.color ='rgb(202, 4, 4)';
             computerScore++;
         }
         else{
-            displayMessage2(`You won! Rock beats ${computerChoice}<br>`);
+            resultShow(`U won!!! Rock DEMOLISHES scissors!!! Kachow!!!!`);
+            resultItem.style.color = ' rgb(4, 216, 4)'
             humanScore++;
         }
     }
     else if(humanChoice=="paper"){
         if(computerChoice=="rock"){
-            displayMessage2(`You won! Paper beats ${computerChoice}<br>`);
+            resultShow(`U won!!! Paper ENVELOPS rock!!! Kachow!!!!`);
+            resultItem.style.color = ' rgb(4, 216, 4)'
             humanScore++;
         }
         else{
-            displayMessage2(`You lose! ${humanChoice} beaten by Scissors<br>`);
+            resultShow(`U lost boy!!! Scissors BUTCHER paper!!!`);
+            resultItem.style.color ='rgb(202, 4, 4)';
             computerScore++;
         }
     }
     else if(humanChoice=="scissors"){
         if(computerChoice=="rock"){
-            displayMessage2(`You lose! ${humanChoice} beaten by Rock<br>`);
+            resultShow(`U lost boy!!! Rock DEMOLISHES scissors!!!`);
+            resultItem.style.color ='rgb(202, 4, 4)';
             computerScore++;
         }
         else{
-            displayMessage2(`You won! Scissors beats ${computerChoice}<br>`);
+            resultShow(`U won!!! Scissors BUTCHER paper!!! Kachow!!!!`);
+            resultItem.style.color = ' rgb(4, 216, 4)'
             humanScore++;
         }
     }
@@ -82,37 +92,37 @@ function playRound(humanChoice,computerChoice){
 let humanChoice 
 let computerChoice
 
-//created a button when pressed takes input from user
-let rockButton=document.createElement('button')
-rockButton.innerHTML="<span>Rock</span>"
-rockButton.addEventListener('click',()=>{
+let rock=document.querySelector('#rock')
+rock.addEventListener('click',()=>{
     humanChoice = 'rock'
 })
-let paperButton=document.createElement('button')
-paperButton.innerHTML="<span>Paper</span>"
-paperButton.addEventListener('click',()=>{
+let paper=document.querySelector('#paper')
+paper.addEventListener('click',()=>{
     humanChoice = 'paper'
 })
-let scissorsButton=document.createElement('button')
-scissorsButton.innerHTML="<span>Scissors</span>"
-scissorsButton.addEventListener('click',()=>{
+let scissors=document.querySelector('#scissors')
+scissors.addEventListener('click',()=>{
     humanChoice = 'scissors'
 })
-//created a button when pressed plays the game using play round function 
-let playGame=document.createElement('div')
-playGame.innerHTML="<button id='playRound'>Play Round</button>"
-playGame.addEventListener('click',()=>{
+
+const playButton = document.querySelector('#play-button')
+playButton.addEventListener('click',()=>{
+    humanScoreNum.textContent = `${humanScore}`
+    computerScoreNum.textContent = `${computerScore}`
     computerChoice = getComputerChoice()
     playRound(humanChoice, computerChoice);
     humanChoice=undefined
     computerChoice=undefined
 if(humanScore<5 && computerScore<5){
-    displayMessage1(`Computer : ${computerScore} You : ${humanScore}`);
+    humanScoreNum.textContent = `${humanScore}`
+    computerScoreNum.textContent = `${computerScore}`
 } else if (humanScore===5 || computerScore===5){
-    displayMessage1(`Computer : ${computerScore} You : ${humanScore}`);
+    humanScoreNum.textContent = `${humanScore}`
+    computerScoreNum.textContent = `${computerScore}`
     result();
     humanScore = 0
     computerScore = 0
+    computer.textContent = '💻'
 }
 })
 
@@ -123,21 +133,15 @@ if(humanScore<5 && computerScore<5){
 
 function result(){
     if(humanScore>computerScore){
-        displayMessage2(`You Won! by ${humanScore-computerScore} points`);
+
+        resultShow(`You Won! by ${humanScore-computerScore} points`);
     }
     else if(computerScore>humanScore){
-        displayMessage2(`You lost! by ${computerScore-humanScore} points`);
+        resultShow(`You lost! by ${computerScore-humanScore} points`);
     }
 }
-const p1 = document.createElement("p");
-p1.setAttribute("id",'display1')
-resultPara.appendChild(p1)
-function displayMessage1(message){
-    p1.innerHTML=`${message}`;
-}
-const p2 = document.createElement("p");
-p2.setAttribute("id",'display2')
-resultPara.appendChild(p2)
-function displayMessage2(message){
-    p2.innerHTML=`${message}`;
+
+//print result on screen
+function resultShow(message){
+    resultItem.textContent = `${message}`;
 }
