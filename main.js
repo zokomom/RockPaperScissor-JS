@@ -33,7 +33,7 @@ let computerScore=0;
 
 // takes the human and computer player choices as arguments
 // plays a single round, increments the round winner’s score 
-// and logs a winner announcemen
+// and logs a winner announcement
 function playRound(humanChoice,computerChoice){
     //converts humanChoice to lower case
     if(!humanChoice || !computerChoice){
